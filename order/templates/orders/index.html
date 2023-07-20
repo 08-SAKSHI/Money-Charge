@@ -1,0 +1,35 @@
+{% extends 'base/index.html' %}
+
+{% block content %}
+<div class="d-flex">
+    
+    {% include 'base/sidebar.html' %}
+
+    <div class="p-5" style="width:100%">
+        <button class="float-end btn btn-warning">Logout</button>
+        <h3 class="text-dark">Orders</h3>
+        <table class="table table-hover">
+            <thead class="">
+                <tr class="">
+                    <td class=""> Order ID</td>
+                    <td> Receiver Name</td>
+                    <td> Transaction Type</td>
+                    <td> Status </td>
+                    <td> Order_Date </td>
+                </tr>
+            </thead>
+            <tbody class="">
+                {% for order in orders %}
+                    <tr>
+                        <td>{{order.order_id}}</td>
+                        <td><a href=/order/{{order.order_id}}>{{order.receiver_name}}</a></td>
+                        <td>{{order.transaction_type}}</td>
+                        <td>{{order.status}}</td>
+                        <td>{{order.created_at}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

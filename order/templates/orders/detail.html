@@ -1,0 +1,16 @@
+{% extends 'base/index.html' %}
+
+{% block content %}
+    Order_id:{{order.order_id}}<br/>
+    Receiver Name:{{order.receiver_name}}<br/>
+    Transaction Type:{{order.transaction_type}}<br/>
+    Status:{{order.status}}<br/>
+
+    {% for detail in order_details %}
+        <b>New Value</b>
+        Key: {{detail.key}} <br/>
+        Value: {{detail.value}} <br/>
+    {% endfor %}
+    <button onclick="history.back()">Go Back</button>
+
+{% endblock content %}

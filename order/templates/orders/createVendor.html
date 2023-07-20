@@ -1,0 +1,66 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="d-flex">
+        {% include 'base/sidebar.html' %}
+        <div class="p-5" style="width:100%">
+            <button class="float-end btn btn-warning">Logout</button>
+            <h3 class="text-dark">Pay to Vendor</h3>
+            {% if errors %}
+                <div class="alert alert-danger  " role="alert">
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% include 'base/create_order_nav.html' %}
+            <style>
+                #toVendor{
+                    border:2px solid #FB923C!important;
+                }
+            </style>
+            <form method=POST action="">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-12 col-lg-6 col-6  ">
+                        <label class="">
+                            Account Number
+                        </label>
+                        <input type="number" class="form-control" name="account_number" required value="{{ form.account_number }}"/>
+                    </div>
+                    <div class="col-md-12 col-lg-6 col-6  ">
+                        <label>
+                            Confirm Account Number
+                        </label>
+                        <input type="number" class="form-control" name="confirm_account_number" required value="{{ form.confirm_account_number }}"/>
+                    </div>
+                    <div class="col-md-12 col-lg-6 col-6  ">
+                        <label>
+                            IFS Code
+                        </label>
+                        <input type="text" class="form-control" name="ifsc_code" required value="{{ form.ifsc_code }}"/>
+                    </div>
+                    <div class="col-md-12 col-lg-6 col-6  ">
+                        <label>
+                            Receiver Name
+                        </label>
+                        <input type="text" class="form-control" name="receiver_name" required value="{{ form.receiver_name }}"/>
+                    </div>
+                    <div class="col-md-12 col-lg-6 col-6  ">
+                        <label>
+                            Amount
+                        </label>
+                        <input type="number" class="form-control" name="amount" required value="{{ form.amount }}"/>
+                    </div>
+{#                    hidden input for transaction_type and status#}
+                    <input type="hidden" name="transaction_type" value="to_vendor_account"/>
+                    <input type="hidden" name="status" value="pending"/>
+                </div>
+
+                <button type=submit class="btn btn-warning my-2"> Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
